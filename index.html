@@ -3,294 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MySQL Demo — Shodiyor</title>
+  <title>MySQL demo</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 45%, #0f172a 100%);
-      color: #f8fafc;
-      display: flex;
-      justify-content: center;
-      padding: 40px 16px;
-    }
-    .container {
-      width: 100%;
-      max-width: 480px;
-    }
-    .header {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-    .header h1 {
-      font-size: 30px;
-      font-weight: 800;
-      background: linear-gradient(to right, #e0e7ff, #7dd3fc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 6px;
-    }
-    .header p {
-      color: #cbd5e1;
-      font-size: 14px;
-    }
-    .card {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 18px;
-      padding: 18px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-      margin-bottom: 24px;
-    }
-    .form-group {
-      display: flex;
-      gap: 10px;
-    }
-    input {
-      flex: 1;
-      padding: 12px 16px;
-      font-size: 16px;
-      color: #fff;
-      background: rgba(15, 23, 42, 0.65);
-      border: 1.5px solid rgba(129, 140, 248, 0.4);
-      border-radius: 12px;
-      outline: none;
-      transition: 0.2s;
-    }
-    input:focus {
-      border-color: #818cf8;
-      box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
-    }
-    input::placeholder {
-      color: #94a3b8;
-    }
-    .btn-save {
-      padding: 12px 22px;
-      font-size: 16px;
-      font-weight: 600;
-      color: #fff;
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: 0.2s;
-      white-space: nowrap;
-    }
-    .btn-save:hover {
-      background: linear-gradient(135deg, #818cf8, #6366f1);
-      transform: translateY(-1px);
-    }
-    .btn-save:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    .status-msg {
-      margin-top: 10px;
-      font-size: 13px;
-      text-align: center;
-      min-height: 18px;
-    }
-    .error { color: #fca5a5; }
-    .success { color: #86efac; }
-    .list-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      padding: 0 4px;
-    }
-    .list-header span {
-      font-size: 15px;
-      font-weight: 600;
-      color: #e2e8f0;
-    }
-    .badge {
-      background: rgba(99, 102, 241, 0.3);
-      border: 1px solid rgba(129, 140, 248, 0.4);
-      color: #e0e7ff;
-      padding: 2px 10px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-    ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    li {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 14px;
-      padding: 14px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      transition: 0.2s;
-    }
-    li:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-    .item-info {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      word-break: break-word;
-    }
-    .item-name {
-      font-size: 16px;
-      font-weight: 600;
-      color: #f1f5f9;
-    }
-    .item-date {
-      font-size: 12px;
-      color: #94a3b8;
-    }
-    .btn-del {
-      padding: 7px 12px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #fecaca;
-      background: rgba(239, 68, 68, 0.18);
-      border: 1px solid rgba(239, 68, 68, 0.35);
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.2s;
-      white-space: nowrap;
-    }
-    .btn-del:hover {
-      background: rgba(239, 68, 68, 0.35);
-      color: #fff;
-    }
-    .empty-box {
-      text-align: center;
-      padding: 28px 16px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px dashed rgba(255, 255, 255, 0.18);
-      border-radius: 16px;
-      color: #94a3b8;
-      font-size: 14px;
-    }
+    body { font-family: system-ui, sans-serif; max-width: 500px; margin: 30px auto; padding: 0 15px; }
+    h1 { font-size: 28px; margin-bottom: 15px; }
+    .form-group { display: flex; gap: 8px; margin-bottom: 20px; }
+    input { flex: 1; padding: 10px; font-size: 16px; border: 2px solid #000; border-radius: 4px; }
+    button { padding: 10px 18px; font-size: 16px; cursor: pointer; border: 1px solid #888; border-radius: 4px; background: #f3f4f6; }
+    ul { padding-left: 20px; }
+    li { margin-bottom: 10px; font-size: 17px; }
+    .date { color: #6b7280; font-size: 14px; display: block; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Ismingizni qoldiring</h1>
-      <p>Ismingizni yozing va ro‘yxatga qo‘shing</p>
-    </div>
-
-    <div class="card">
-      <div class="form-group">
-        <input type="text" id="nameInput" placeholder="Ismingizni kiriting..." onkeydown="if(event.key==='Enter') saveName()">
-        <button class="btn-save" id="saveBtn" onclick="saveName()">Saqlash</button>
-      </div>
-      <div id="statusMsg" class="status-msg"></div>
-    </div>
-
-    <div class="list-header">
-      <span>Ro‘yxat</span>
-      <span class="badge" id="countBadge">0</span>
-    </div>
-
-    <ul id="list"></ul>
+  <h1>Ismingizni qoldiring</h1>
+  <div class="form-group">
+    <input type="text" id="nameInput" placeholder="Ism">
+    <button onclick="saveName()">Saqlash</button>
   </div>
+  <ul id="list"></ul>
 
   <script>
-    const API_URL = '/.netlify/functions/api';
-
-    function showStatus(text, isError = false) {
-      const el = document.getElementById('statusMsg');
-      el.textContent = text;
-      el.className = 'status-msg ' + (isError ? 'error' : 'success');
-      if (text) setTimeout(() => { el.textContent = ''; }, 3500);
-    }
-
-    function escapeHtml(str) {
-      return String(str).replace(/[&<>"']/g, m => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-      }[m]));
-    }
-
     async function load() {
-      const listEl = document.getElementById('list');
-      const badgeEl = document.getElementById('countBadge');
-      try {
-        const res = await fetch(API_URL);
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Yuklashda xatolik');
-
-        badgeEl.textContent = data.length;
-        if (data.length === 0) {
-          listEl.innerHTML = '<div class="empty-box">Hozircha ro‘yxat bo‘sh. Birinchi bo‘lib ism qo‘shing!</div>';
-          return;
-        }
-
-        listEl.innerHTML = data.map(r => {
-          const d = new Date(r.created_at).toLocaleString('en-GB');
-          return `
-            <li>
-              <div class="item-info">
-                <span class="item-name">${escapeHtml(r.name)}</span>
-                <span class="item-date">${d}</span>
-              </div>
-              <button class="btn-del" onclick="deleteName(${r.id})">O‘chirish</button>
-            </li>
-          `;
-        }).join('');
-      } catch (err) {
-        listEl.innerHTML = `<div class="empty-box error">Xatolik: ${escapeHtml(err.message)}</div>`;
-      }
+      const res = await fetch('/.netlify/functions/api');
+      const data = await res.json();
+      document.getElementById('list').innerHTML = data.map(r => {
+        const d = new Date(r.created_at).toLocaleString('en-GB');
+        return `<li>${r.name} <span class="date">(${d})</span></li>`;
+      }).join('');
     }
 
     async function saveName() {
       const inp = document.getElementById('nameInput');
-      const btn = document.getElementById('saveBtn');
-      const val = inp.value.trim();
-      if (!val) {
-        showStatus('Iltimos, ism kiriting!', true);
-        return;
-      }
-
-      btn.disabled = true;
-      btn.textContent = 'Saqlanmoqda...';
-      try {
-        const res = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: val })
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Saqlashda xatolik');
-
-        inp.value = '';
-        showStatus('Muvaffaqiyatli saqlandi!');
-        await load();
-      } catch (err) {
-        showStatus(err.message, true);
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Saqlash';
-      }
+      if (!inp.value.trim()) return;
+      await fetch('/.netlify/functions/api', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: inp.value.trim() })
+      });
+      inp.value = '';
+      load();
     }
-
-    async function deleteName(id) {
-      try {
-        const res = await fetch(`${API_URL}?id=${id}`, { method: 'DELETE' });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'O‘chirishda xatolik');
-
-        showStatus('Yozuv o‘chirildi');
-        await load();
-      } catch (err) {
-        showStatus(err.message, true);
-      }
-    }
-
     load();
   </script>
 </body>
